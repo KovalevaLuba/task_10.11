@@ -69,6 +69,9 @@ const display = () => {
       case 'светло-коричневый':
         fruitLi.className = `fruit__item fruit_lightbrown`;
         break;
+      default:
+        fruitLi.className = `fruit__item fruit_default`;
+        break;
     }
   };
 };
@@ -153,7 +156,7 @@ const sortAPI = {
       const temp = items[firstIndex];
       items[firstIndex] = items[secondIndex];
       items[secondIndex] = temp;
-
+    }
     function partition(items, left, right) {
         var pivot = items[Math.floor((right + left) / 2)],
             i = left,
@@ -172,7 +175,6 @@ const sortAPI = {
             }
         }
         return i;
-     }
    }
    function quickSort(items, left, right) {
     var index;
@@ -218,7 +220,17 @@ sortActionButton.addEventListener('click', () => {
 /*** ДОБАВИТЬ ФРУКТ ***/
 
 addActionButton.addEventListener('click', () => {
-  // TODO: создание и добавление нового фрукта в массив fruits
-  // необходимые значения берем из kindInput, colorInput, weightInput
+  const kind = kindInput.value;
+  const color = colorInput.value;
+  const weight = weightInput.value; 
+  if (kind == '' || color == '' || weight == '')  {
+    alert("Заполните все поля")
+  } else {
+    fruits.push({
+      "kind": kind,
+      "color": color,
+      "weight": weight
+    })
+  }
   display();
 });
